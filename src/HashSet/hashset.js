@@ -29,16 +29,6 @@ export default class HashSet {
     this.buckets[hashKey] = list;
   }
 
-  get(key) {
-    let hashKey = this.hash(key);
-    let list = this.buckets[hashKey];
-    if (list) {
-      return list.getValue(key);
-    } else {
-      return null;
-    }
-  }
-
   has(key) {
     let hashKey = this.hash(key);
     let list = this.buckets[hashKey];

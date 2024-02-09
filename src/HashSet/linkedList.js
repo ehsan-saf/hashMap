@@ -1,10 +1,6 @@
 class Node {
-  constructor(key, value, next = null) {
-    this.pair = {
-      key: key,
-      value: value,
-    };
-    this.next = next;
+  constructor(key, next = null) {
+    (this.key = key), (this.next = next);
   }
 }
 
@@ -13,8 +9,8 @@ export default class LinkedList {
     this.headNode = null;
   }
 
-  append(key, value) {
-    let node = new Node(key, value);
+  append(key) {
+    let node = new Node(key);
     if (this.headNode === null) {
       this.headNode = node;
     } else {
@@ -66,30 +62,17 @@ export default class LinkedList {
     this.at(this.size() - 2).next = null;
   }
 
-  getValue(key) {
-    let node = this.headNode;
-    let result = null;
-    while (node) {
-      if (node.pair.key == key) {
-        result = node.pair.value;
-        break;
-      }
-      node = node.next;
-    }
-    return result;
-  }
-
   contains(key) {
     let node = this.headNode;
-    let hasValue = false;
+    let hasKey = false;
     while (node) {
-      if (node.pair.key === key) {
-        hasValue = true;
+      if (node.key === key) {
+        hasKey = true;
         break;
       }
       node = node.next;
     }
-    return hasValue;
+    return hasKey;
   }
 
   find(key) {
@@ -97,7 +80,7 @@ export default class LinkedList {
     let isFound = false;
     let index = 0;
     while (node) {
-      if (node.pair.key === value) {
+      if (node.key === key) {
         isFound = true;
         break;
       }
@@ -120,14 +103,14 @@ export default class LinkedList {
 
   removeAt(key) {
     let hasRemoved = false;
-    if (this.headNode.pair.key === key) {
+    if (this.headNode.key === key) {
       this.headNode = this.headNode.next;
       hasRemoved = true;
     } else {
       let pre = this.headNode.next;
       let currentNode = this.headNode.next.next;
       while (currentNode) {
-        if (currentNode.pair.key === key) {
+        if (currentNode.key === key) {
           let nextTemp = currentNode.next;
           pre.next = nextTemp;
           break;
@@ -135,25 +118,11 @@ export default class LinkedList {
         pre = currentNode;
         currentNode = currentNode.next;
       }
-      if (!hasRemoved && this.headNode.next.pair.key === key) {
+      if (!hasRemoved && this.headNode.next.key === key) {
         this.headNode.next = null;
         hasRemoved = true;
       }
     }
     return hasRemoved;
-  }
-
-  updateAddNode(key, value) {
-    let node = this.headNode;
-    while (node) {
-      if (node.pair.key === key) {
-        node.pair.value = value;
-        break;
-      } else if (node.next === null) {
-        node.next = new Node(key, value);
-        break;
-      }
-      node = node.next;
-    }
   }
 }

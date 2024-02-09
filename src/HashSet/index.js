@@ -1,23 +1,17 @@
-import HashMap from "./hashmap.js";
+import HashSet from "./hashset.js";
 
-let map = new HashMap();
-map.set("ehsan", "safiei");
-map.set("saneh", "ahmadi");
+console.log("Hi");
 
-let value = map.get("ehsan");
-console.log(value);
+let map = new HashSet();
+map.set("ehsan");
+map.set("saneh");
 
-console.log(`saneh is in the map ${map.has("saneh")}`);
-
-console.log(map.get("saneh"));
+console.log(`saneh is in the map ${map.has("ehsan")}`);
 
 console.log(`Number of stored keys: ${map.length()}`);
 
 let keys = map.keys();
 console.log(keys);
-
-let values = map.values();
-console.log(values);
 
 let entries = map.entries();
 entries.forEach((entry) => {
